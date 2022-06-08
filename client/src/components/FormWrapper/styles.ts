@@ -14,7 +14,6 @@ export const Wrapper = styled.div`
 
 export const Logo = styled.div`
   display: flex;
-  border-right: solid 10px black;
   align-items: center;
   width: 100%;
   box-sizing: border-box;
