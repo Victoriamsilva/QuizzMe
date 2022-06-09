@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   background-color: var(--background-blue);
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   margin: 0;
   display: flex;

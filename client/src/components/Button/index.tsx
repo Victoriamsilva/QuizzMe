@@ -2,9 +2,18 @@ import * as S from "./styles";
 
 interface ButtonProps {
   text: string;
-  onClick: () => void;
+  type?: "submit" | "button";
+  onClick?: () => void;
 }
 
-export default function Button({ text, onClick }: ButtonProps) {
-  return <S.Button onClick={onClick}>{text}</S.Button>;
+export default function Button({
+  text,
+  type = "submit",
+  onClick,
+}: ButtonProps) {
+  return (
+    <S.Button type={type} onClick={onClick}>
+      {text}
+    </S.Button>
+  );
 }
