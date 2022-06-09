@@ -1,7 +1,10 @@
 import api from "../api";
-import { IForm } from "../../pages/Login/index";
+interface SignUpData {
+  email: string;
+  password: string;
+}
 
-export default async function login({ email, password }: IForm) {
+export default async function login({ email, password }: SignUpData) {
   return api.post(import.meta.env.VITE_API_URL, {
     email,
     password,

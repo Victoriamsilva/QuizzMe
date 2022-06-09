@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import Button from "../../components/Button/index";
 import Input from "../../components/input";
 import SocialLoginButton from "../../components/SocialLoginButton";
@@ -7,30 +6,26 @@ import logoGoogle from "../../assets/logo-google.png";
 import logoFacebook from "../../assets/logo-facebook.png";
 import FormWrapper from "../../components/FormWrapper";
 import login from "../../service/login";
-
-export interface IForm {
-  email: string;
-  password: string;
-}
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [values, setValues] = useState<IForm>({ email: "", password: "" });
 
-  function onChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { value, name } = event.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  }
+  const schemaUser = Yup.object().shape({
+    email: Yup.string()
+      .email("Formato de email inválido")
+      .required("Email é obrigatório"),
+    password: Yup.string().required("Senha é obrigatório"),
+  });
 
-  async function loginUser() {
+  async function loginUser(values: any) {
     try {
-      const { data } = await login(values);
-      if (data) {
-        navigate("/home");
-      }
+      // const { data } = await login(values);
+      console.log(values);
+      // if (data) {
+      //   navigate("/home");
+      // }
     } catch (error) {
       console.log(error);
     }
@@ -43,38 +38,58 @@ export default function Login() {
   return (
     <FormWrapper>
       <h1>Faça Login</h1>
-      <form>
-        <Input
-          onChange={onChange}
-          name="email"
-          type="email"
-          placeholder="Email"
-        />
-        <Input
-          onChange={onChange}
-          name="password"
-          type="password"
-          placeholder="Senha"
-        />
-        <Button text="Logar no Quizz Me!" onClick={loginUser} />
-        <h2>OU</h2>
-        <SocialLoginButton
-          text="Conectar com o Google"
-          onClick={loginUser}
-          image={logoGoogle}
-          color="red"
-        />
-        <SocialLoginButton
-          text="Conectar com o Facebook"
-          onClick={loginUser}
-          image={logoFacebook}
-          color="blue"
-        />
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        onSubmit={loginUser}
+        validationSchema={schemaUser}
+      >
+        {({
+          handleChange,
+          handleSubmit,
+          handleBlur,
+          values,
+          errors,
+          touched,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <Input
+              onChange={handleChange}
+              name="email"
+              type="email"
+              placeholder="Email"
+              error={errors?.email}
+              touched={touched.email}
+              onBlur={handleBlur}
+            />
+            <Input
+              onChange={handleChange}
+              name="password"
+              type="password"
+              placeholder="Senha"
+              error={errors?.password}
+              touched={touched.password}
+              onBlur={handleBlur}
+            />
 
-        <h2>OU</h2>
+            <Button text="Logar no Quizz Me!" />
+            <h2>OU</h2>
+            <SocialLoginButton
+              text="Conectar com o Google"
+              image={logoGoogle}
+              color="red"
+            />
+            <SocialLoginButton
+              text="Conectar com o Facebook"
+              image={logoFacebook}
+              color="blue"
+            />
 
-        <a onClick={handleClick}>Crie uma conta</a>
-      </form>
+            <h2>OU</h2>
+
+            <a onClick={handleClick}>Crie uma conta</a>
+          </form>
+        )}
+      </Formik>
     </FormWrapper>
   );
 }
