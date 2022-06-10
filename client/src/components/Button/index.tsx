@@ -3,7 +3,7 @@ import * as S from "./styles";
 interface ButtonProps {
   text: string;
   type?: "submit" | "button";
-  onClick?: () => void | any;
+  onClick?: () => void;
 }
 
 export default function Button({
