@@ -28,6 +28,7 @@ export default function Input({
         name={name}
         error={error}
         onBlur={onBlur}
+        touched={touched}
       />
       {error && touched && <S.InputError>{error}</S.InputError>}
     </>

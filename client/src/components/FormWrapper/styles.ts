@@ -2,11 +2,15 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   background-color: var(--background-blue);
+  position: absolute;
   min-height: 100vh;
-  width: 100vw;
+  top: 0;
+  right: 0;
+  left: 0;
   margin: 0;
   display: flex;
   font-family: "Yanone Kaffeesatz";
+  box-sizing: border-box;
   @media screen and (max-width: 600px) {
     flex-direction: column;
   }
@@ -15,16 +19,16 @@ export const Wrapper = styled.div`
 export const Logo = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
   box-sizing: border-box;
   justify-content: center;
+  flex-grow: 1;
   img {
     width: 50%;
   }
   @media screen and (max-width: 600px) {
-    padding: 50px;
+    padding: 50px 0;
     img {
-      width: 70%;
+      width: 50%;
     }
   }
 `;
@@ -35,6 +39,12 @@ export const Form = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 8%;
+  flex-grow: 1;
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
   h1 {
     color: var(--white);
     margin-bottom: 15px;

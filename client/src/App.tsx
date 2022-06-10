@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import { AppRoutes } from "./routes/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const GlobalStyles = createGlobalStyle`
 * {
@@ -23,6 +25,7 @@ function App() {
     <div className="App">
       <GlobalStyles />
       <AppRoutes />
+      <ToastContainer />
     </div>
   );
 }
