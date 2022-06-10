@@ -13,9 +13,6 @@ export const Input = styled.input<InputProps>`
   &:focus {
     border-color: var(--background-yellow);
   }
-  @media screen and (max-width: 600px) {
-    margin-bottom: 30px;
-  }
 `;
 export const InputError = styled.span`
   color: var(--red);
