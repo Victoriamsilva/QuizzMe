@@ -1,10 +1,10 @@
 import api from "../api";
-interface SignUpData {
+export interface LoginData {
   email: string;
   password: string;
 }
 
-export default async function login({ email, password }: SignUpData) {
+export default async function login({ email, password }: LoginData) {
   return api.post(import.meta.env.VITE_API_URL, {
     email,
     password,
