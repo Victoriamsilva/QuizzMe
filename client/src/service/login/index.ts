@@ -5,7 +5,7 @@ export interface LoginData {
 }
 
 export default async function login({ email, password }: LoginData) {
-  return api.post(import.meta.env.VITE_API_URL, {
+  return api.post(`${import.meta.env.VITE_API_URL}/user/login`, {
     email,
     password,
   });
