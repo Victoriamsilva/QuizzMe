@@ -4,9 +4,10 @@ import Input from "../../components/input";
 import FormWrapper from "../../components/FormWrapper";
 import ArrowImage from "../../assets/arrow-left.png";
 import * as S from "./styles";
-import signUp from "../../service/signUp";
+import signUp, { SignUpData } from "../../service/signUp";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import notify from "../../utils/notify";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -16,18 +17,21 @@ export default function SignUp() {
       .email("Formato de email inválido")
       .required("Email é obrigatório"),
     password: Yup.string().required("Senha é obrigatório"),
-    confirmPassword: Yup.string().required("Senha é obrigatório"),
+    confirmPassword: Yup.string()
+      .required("Senha é obrigatório")
+      .oneOf([Yup.ref("password"), null], "Senhas devem ser iguais"),
   });
 
-  async function signUpUser(values: any) {
+  async function signUpUser({ name, email, password }: SignUpData) {
     try {
-      // const { data } = await signUp(values);
-      console.log(values);
-      // if (data) {
-      // navigate("/home");
-      // }
-    } catch (error) {
-      console.log(error);
+      const { data } = await signUp({ name, email, password });
+      if (data) {
+        navigate("/home");
+      }
+    } catch (error: any) {
+      error.message && typeof error.message === "string"
+        ? notify(error.message)
+        : notify("Erro inesperado");
     }
   }
 

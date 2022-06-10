@@ -6,7 +6,7 @@ export const Input = styled.input<InputProps>`
   height: 38px;
   border-radius: 0.375rem;
   transition: all 0.3s ease;
-  margin-bottom: ${(props) => `${props.error ? "0" : "15px"}`};
+  margin-bottom: ${(props) => `${props.error && props.touched ? "0" : "15px"}`};
   padding: 10px;
   outline: none;
   border: 2px solid transparent;
@@ -23,6 +23,6 @@ export const InputError = styled.span`
   font-weight: 100;
   font-size: 18px;
   height: 15px;
-  margin: 2px 0;
+  margin-bottom: 15px;
   display: inline-block;
 `;
