@@ -1,22 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import api from "../../service/api";
 import Button from "../../components/Button/index";
 import Input from "../../components/input";
 import SocialLoginButton from "../../components/SocialLoginButton";
 import logoGoogle from "../../assets/logo-google.png";
 import logoFacebook from "../../assets/logo-facebook.png";
 import FormWrapper from "../../components/FormWrapper";
+import login from "../../service/login";
 
-interface IForm {
+export interface IForm {
   email: string;
-  senha: string;
+  password: string;
 }
 
 export default function Login() {
   const navigate = useNavigate();
-  const [values, setValues] = useState<IForm>({ email: "", senha: "" });
-  const [error, setError] = useState("");
+  const [values, setValues] = useState<IForm>({ email: "", password: "" });
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
@@ -26,20 +25,15 @@ export default function Login() {
     });
   }
 
-  function loginUser({ email, senha }: IForm) {
-    api
-      .post("http://localhost:3000/login", { email, senha })
-      .then(({ data }) => {
-        if (data) {
-          setError("");
-          navigate("/home");
-        }
-      })
-      .catch((err) => {
-        if (err) {
-          setError(err);
-        }
-      });
+  async function loginUser() {
+    try {
+      const { data } = await login(values);
+      if (data) {
+        navigate("/home");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function handleClick() {
@@ -62,17 +56,17 @@ export default function Login() {
           type="password"
           placeholder="Senha"
         />
-        <Button text="Logar no Quizz Me!" onClick={() => loginUser(values)} />
+        <Button text="Logar no Quizz Me!" onClick={loginUser} />
         <h2>OU</h2>
         <SocialLoginButton
           text="Conectar com o Google"
-          onClick={() => loginUser(values)}
+          onClick={loginUser}
           image={logoGoogle}
           color="red"
         />
         <SocialLoginButton
           text="Conectar com o Facebook"
-          onClick={() => loginUser(values)}
+          onClick={loginUser}
           image={logoFacebook}
           color="blue"
         />

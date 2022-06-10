@@ -10,6 +10,10 @@ export const Button = styled.button`
   transition: all 0.3s ease;
   margin-bottom: 15px;
   cursor: pointer;
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
   &:hover {
     background-color: var(--hover-yellow);
   }
