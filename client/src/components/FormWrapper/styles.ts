@@ -35,6 +35,7 @@ export const Form = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 8%;
+  width: 100%;
   h1 {
     color: var(--white);
     margin-bottom: 15px;
