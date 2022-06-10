@@ -5,9 +5,10 @@ import SocialLoginButton from "../../components/SocialLoginButton";
 import logoGoogle from "../../assets/logo-google.png";
 import logoFacebook from "../../assets/logo-facebook.png";
 import FormWrapper from "../../components/FormWrapper";
-import login from "../../service/login";
+import login, { LoginData } from "../../service/login";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import notify from "../../utils/notify";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,15 +20,16 @@ export default function Login() {
     password: Yup.string().required("Senha é obrigatório"),
   });
 
-  async function loginUser(values: any) {
+  async function loginUser(values: LoginData) {
     try {
-      // const { data } = await login(values);
-      console.log(values);
-      // if (data) {
-      //   navigate("/home");
-      // }
-    } catch (error) {
-      console.log(error);
+      const { data } = await login(values);
+      if (data) {
+        navigate("/home");
+      }
+    } catch (error: any) {
+      error.message && typeof error.message === "string"
+        ? notify(error.message)
+        : notify("Erro inesperado");
     }
   }
 
@@ -47,9 +49,9 @@ export default function Login() {
           handleChange,
           handleSubmit,
           handleBlur,
-          values,
           errors,
           touched,
+          isValid,
         }) => (
           <form onSubmit={handleSubmit}>
             <Input
@@ -71,7 +73,7 @@ export default function Login() {
               onBlur={handleBlur}
             />
 
-            <Button text="Logar no Quizz Me!" />
+            <Button text="Logar no Quizz Me!" disabled={!isValid} />
             <h2>OU</h2>
             <SocialLoginButton
               text="Conectar com o Google"
