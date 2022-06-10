@@ -29,8 +29,9 @@ export default function SignUp() {
         navigate("/home");
       }
     } catch (error: any) {
-      error.message && typeof error.message === "string"
-        ? notify(error.message)
+      error.response.data.message &&
+      typeof error.response.data.message === "string"
+        ? notify(error.response.data.message)
         : notify("Erro inesperado");
     }
   }
