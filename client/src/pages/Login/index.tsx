@@ -1,41 +1,48 @@
-import { useNavigate } from "react-router-dom";
-import Button from "../../components/Button/index";
-import Input from "../../components/input";
-import SocialLoginButton from "../../components/SocialLoginButton";
-import logoGoogle from "../../assets/logo-google.png";
-import logoFacebook from "../../assets/logo-facebook.png";
-import FormWrapper from "../../components/FormWrapper";
-import login, { LoginData } from "../../service/login";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import notify from "../../utils/notify";
+import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button/index';
+import Input from '../../components/input';
+import SocialLoginButton from '../../components/SocialLoginButton';
+import logoGoogle from '../../assets/logo-google.png';
+import logoFacebook from '../../assets/logo-facebook.png';
+import FormWrapper from '../../components/FormWrapper';
+import login from '../../service/login';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import notify from '../../utils/notify';
+import { useContext, useState } from 'react';
+import { TokenContext } from '../../store/context';
+import { UserModel } from '../../domain/entities/user.model';
 
 export default function Login() {
   const navigate = useNavigate();
+  const { setToken, removeToken } = useContext(TokenContext);
+  
 
   const schemaUser = Yup.object().shape({
     email: Yup.string()
-      .email("Formato de email inválido")
-      .required("Email é obrigatório"),
-    password: Yup.string().required("Senha é obrigatório"),
+      .email('Formato de email inválido')
+      .required('Email é obrigatório'),
+    password: Yup.string().required('Senha é obrigatório')
   });
 
-  async function loginUser(values: LoginData) {
+
+  async function loginUser(values: UserModel) {
     try {
-      const { data } = await login(values);
-      if (data) {
-        navigate("/home");
+      const user = await login(values);
+      if (user.token) {
+        setToken('token');
+        navigate('/home');
       }
     } catch (error: any) {
       error.response.data.message &&
-      typeof error.response.data.message === "string"
+        typeof error.response.data.message === 'string'
         ? notify(error.response.data.message)
-        : notify("Erro inesperado");
+        : notify('Erro inesperado');
     }
   }
 
   function handleClick() {
-    navigate("/cadastro");
+    navigate('/cadastro');
   }
 
   return (

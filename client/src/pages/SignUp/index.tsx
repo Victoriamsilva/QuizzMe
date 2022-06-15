@@ -1,32 +1,38 @@
-import { useNavigate } from "react-router-dom";
-import Button from "../../components/Button/index";
-import Input from "../../components/input";
-import FormWrapper from "../../components/FormWrapper";
-import ArrowImage from "../../assets/arrow-left.png";
-import * as S from "./styles";
-import signUp, { SignUpData } from "../../service/signUp";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import notify from "../../utils/notify";
+import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button/index';
+import Input from '../../components/input';
+import FormWrapper from '../../components/FormWrapper';
+import ArrowImage from '../../assets/arrow-left.png';
+import * as S from './styles';
+import signUp from '../../service/signUp';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import notify from '../../utils/notify';
+import { UserModel } from '../../domain/entities/user.model';
+import { useContext } from 'react';
+import { TokenContext } from '../../store/context';
 
 export default function SignUp() {
   const navigate = useNavigate();
   const schemaUser = Yup.object().shape({
-    name: Yup.string().required("Nome é obrigatório"),
+    name: Yup.string().required('Nome é obrigatório'),
     email: Yup.string()
-      .email("Formato de email inválido")
-      .required("Email é obrigatório"),
-    password: Yup.string().required("Senha é obrigatório"),
+      .email('Formato de email inválido')
+      .required('Email é obrigatório'),
+    password: Yup.string().required('Senha é obrigatório'),
     confirmPassword: Yup.string()
-      .required("Confirmar senha é obrigatório")
-      .oneOf([Yup.ref("password"), null], "Senhas devem ser iguais"),
+      .required('Confirmar senha é obrigatório')
+      .oneOf([Yup.ref('password'), null], 'Senhas devem ser iguais')
   });
 
-  async function signUpUser({ name, email, password }: SignUpData) {
+  const { setToken, removeToken } = useContext(TokenContext);
+
+  async function signUpUser({ name, email, password }: UserModel) {
     try {
-      const { data } = await signUp({ name, email, password });
-      if (data) {
-        navigate("/home");
+      const user = await signUp({ name, email, password });
+      if (user.token) {
+        setToken(user.token);
+        navigate('/home');
       }
     } catch (error: any) {
       error.response.data.message &&
@@ -37,7 +43,7 @@ export default function SignUp() {
   }
 
   function handleClick() {
-    navigate("/");
+    navigate('/');
   }
 
   return (
@@ -46,10 +52,10 @@ export default function SignUp() {
       <h1>Cadastre-se rapidamente!</h1>
       <Formik
         initialValues={{
-          name: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: ''
         }}
         onSubmit={signUpUser}
         validationSchema={schemaUser}
@@ -60,7 +66,7 @@ export default function SignUp() {
           errors,
           touched,
           handleBlur,
-          isValid,
+          isValid
         }) => (
           <form onSubmit={handleSubmit}>
             <Input
