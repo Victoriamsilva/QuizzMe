@@ -1,5 +1,5 @@
-import * as S from "./styles";
-import Logo from "../../components/logo/index";
+import * as S from './styles';
+import Logo from '../../components/logo/index';
 
 export default function FormWrapper({ children }: any) {
   return (
