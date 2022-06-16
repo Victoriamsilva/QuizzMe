@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  background-color: var(--background-blue);
+  background-color: var(--main-blue);
   position: absolute;
   min-height: 100vh;
   top: 0;
@@ -9,7 +9,6 @@ export const Wrapper = styled.div`
   left: 0;
   margin: 0;
   display: flex;
-  font-family: "Yanone Kaffeesatz";
   box-sizing: border-box;
   @media screen and (max-width: 600px) {
     flex-direction: column;

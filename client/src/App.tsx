@@ -8,11 +8,14 @@ const GlobalStyles = createGlobalStyle`
   margin: 0;
   padding: 0;
 }
+body {
+  font-family: "Yanone Kaffeesatz";
+}
 html {
---background-blue: #333b65;
---background-yellow: #FFC90B;
+--main-blue: #333b65;
+--main-yellow: #FFC90B;
 --text-blue: #5970E7;
---hover-yellow: #ecba0b;
+--yellow-darker: #ecba0b;
 --white: #F1F6FB;
 --white-darker: #e2e7ec;
 --red: #EA4335;

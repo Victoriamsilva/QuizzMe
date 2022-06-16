@@ -11,7 +11,7 @@ export const Input = styled.input<InputProps>`
   border: 2px solid transparent;
   box-sizing: border-box;
   &:focus {
-    border-color: var(--background-yellow);
+    border-color: var(--main-yellow);
   }
 `;
 export const InputError = styled.span`

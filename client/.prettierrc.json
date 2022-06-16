@@ -7,5 +7,6 @@
     "eslint.run": "onSave",
     "eslint.format.enable": true,
     "prettier.enable": false,
-    "eslint.alwaysShowStatus": true
+    "eslint.alwaysShowStatus": true,
+    "disableLanguages": []
 }

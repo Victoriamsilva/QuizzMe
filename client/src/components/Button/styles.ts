@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  background-color: var(--background-yellow);
+  background-color: var(--main-yellow);
   color: var(--text-blue);
   width: 100%;
   height: 38px;
@@ -15,7 +15,7 @@ export const Button = styled.button`
     cursor: not-allowed;
   }
   &:hover {
-    background-color: var(--hover-yellow);
+    background-color: var(--yellow-darker);
   }
   font-weight: 800;
 `;
