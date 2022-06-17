@@ -1,5 +1,4 @@
 import styled from "styled-components";
 
-export const Profile = styled.div`
-  display: flex;
+export const ProfileBanner = styled.div`
 `;

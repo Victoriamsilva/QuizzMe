@@ -1,5 +1,12 @@
+import * as S from "./styles";
+import Pattern from "../../assets/patternp.svg"
+import Header from "../../components/Header";
+
 export default function Profile() {
   return (
-    <h1>Meu Perfil</h1>
+
+    <S.ProfileBanner>
+      <Header />
+    </S.ProfileBanner>
   )
 }
