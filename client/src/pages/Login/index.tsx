@@ -15,8 +15,8 @@ import { UserModel } from '../../domain/entities/user.model';
 
 export default function Login() {
   const navigate = useNavigate();
-  const { setToken, removeToken } = useContext(TokenContext);
-  
+  const { setToken, setUserInformation } = useContext(TokenContext);
+
 
   const schemaUser = Yup.object().shape({
     email: Yup.string()
@@ -29,11 +29,16 @@ export default function Login() {
   async function loginUser(values: UserModel) {
     try {
       // const user = await login(values);
-      const user = {
-        token: "1234"
-      }
+      const user = new UserModel({
+        name: "Victoria",
+        email: "victoria@gmail.com",
+        password: "123",
+        token: "1234",
+        image: "https://i.pinimg.com/originals/e4/34/2a/e4342a4e0e968344b75cf50cf1936c09.jpg"
+      })
       if (user.token) {
-        setToken('token');
+        setToken(user.token);
+        setUserInformation(user);
         navigate('/home');
       }
     } catch (error: any) {

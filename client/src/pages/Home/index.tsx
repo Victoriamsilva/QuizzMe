@@ -1,8 +1,11 @@
-import Navbar from "../../components/Navbar";
+import { Wrapper } from "../../components/FormWrapper/styles";
+import * as S from "./styles";
 
 
 export default function Home() {
-  return(
+  return (
+
     <h1>Home</h1>
+
   )
 }

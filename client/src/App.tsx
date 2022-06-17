@@ -1,12 +1,17 @@
 import { createGlobalStyle } from "styled-components";
 import { AppRoutes } from "./routes/router";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const GlobalStyles = createGlobalStyle`
 * {
   margin: 0;
   padding: 0;
+}
+.App{
+  display: flex;
+  height: 100vh;
+  width: 100vw;
 }
 body {
   font-family: "Yanone Kaffeesatz";
