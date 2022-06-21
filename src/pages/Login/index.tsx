@@ -60,6 +60,7 @@ export default function Login() {
         initialValues={{ email: "", password: "" }}
         onSubmit={loginUser}
         validationSchema={schemaUser}
+        data-testid="form-test"
       >
         {({
           handleChange,

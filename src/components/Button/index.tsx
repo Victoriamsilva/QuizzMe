@@ -14,7 +14,7 @@ export default function Button({
   onClick,
 }: ButtonProps) {
   return (
-    <S.Button type={type} onClick={onClick} disabled={disabled}>
+    <S.Button type={type} onClick={onClick} disabled={disabled} data-testid="button-test">
       {text}
     </S.Button>
   );

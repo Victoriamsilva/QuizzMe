@@ -36,7 +36,7 @@ export default function SignUp() {
       }
     } catch (error: any) {
       error.response.data.message &&
-      typeof error.response.data.message === "string"
+        typeof error.response.data.message === "string"
         ? notify(error.response.data.message)
         : notify("Erro inesperado");
     }
@@ -59,6 +59,7 @@ export default function SignUp() {
         }}
         onSubmit={signUpUser}
         validationSchema={schemaUser}
+        data-testid="signUp-test"
       >
         {({
           handleChange,

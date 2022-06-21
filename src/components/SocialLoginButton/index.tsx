@@ -9,7 +9,7 @@ interface ButtonProps {
 
 export default function SocialLoginButton({ text, image, color }: ButtonProps) {
   return (
-    <S.Button color={color} type="submit">
+    <S.Button color={color} type="submit" data-testid="social-login-test">
       <img src={image} />
       {text}
     </S.Button>

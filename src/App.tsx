@@ -25,6 +25,7 @@ html {
 --white-darker: #e2e7ec;
 --red: #EA4335;
 --blue: #475993;
+--black: #000000;
 }
 `;
 

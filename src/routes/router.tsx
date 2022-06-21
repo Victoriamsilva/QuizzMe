@@ -13,7 +13,7 @@ import { Wrapper } from '../styles/styles';
 export function AppRoutes() {
   return (
     <Provider>
-      <Router>
+      <Router data-testid="routes-test">
         <Navbar />
         <Wrapper>
           <Routes>

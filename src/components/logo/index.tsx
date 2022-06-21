@@ -5,5 +5,5 @@ export default function Logo() {
   const Image = styled.img`
     width: 350px;
   `;
-  return <Image src={logo} alt="" />;
+  return <Image src={logo} alt="" data-testid="logo-test" />;
 }

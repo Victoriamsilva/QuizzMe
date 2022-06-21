@@ -29,6 +29,7 @@ export default function Input({
         error={error}
         onBlur={onBlur}
         touched={touched}
+        data-testid="input-test"
       />
       {error && touched && <S.InputError>{error}</S.InputError>}
     </>
