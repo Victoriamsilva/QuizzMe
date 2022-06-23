@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import Header from "../../components/Header";
-import PaginatedItems from "../../components/pagination";
+import PaginatedItems from "../../components/Pagination";
 import ListQuizzes from "../../service/listQuizz"
 import * as S from "./styles";
-
 
 export default function Home() {
   const [quizzes, setQuizzes] = useState<any>([{}]);
@@ -15,7 +14,6 @@ export default function Home() {
   }
 
   async function getQuizz(page = 0) {
-
     // const response = await ListQuizzes(value, page);
     const response = {
       data: [
@@ -153,6 +151,7 @@ export default function Home() {
     }
     setQuizzes(response.data);
   };
+
   useEffect(() => {
     getQuizz();
   }, []);
@@ -160,7 +159,6 @@ export default function Home() {
   return (
     <>
       <Header onClick={getQuizz} onChange={onChange} />
-
       <S.CardsWrapper>
         {quizzes.map((item: any, index: number) => {
           return (
@@ -168,7 +166,6 @@ export default function Home() {
           );
         })}
       </S.CardsWrapper>
-
       <PaginatedItems itemsPerPage={5} totalItems={20} onSelect={getQuizz} />
     </>
   )

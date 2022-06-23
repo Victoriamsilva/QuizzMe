@@ -1,6 +1,5 @@
 export function MyQuizzes() {
-  return(
+  return (
     <h1>Meus Quizz</h1>
   )
-
 }

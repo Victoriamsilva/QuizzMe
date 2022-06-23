@@ -1,6 +1,6 @@
 import SearchIcon from "../../assets/icon-search.svg";
 import Button from "../Button";
-import Input from "../input";
+import Input from "../Imput";
 import * as S from "./styles";
 
 export default function Header({ onChange, onClick }: any) {

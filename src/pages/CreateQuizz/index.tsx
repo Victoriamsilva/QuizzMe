@@ -9,8 +9,6 @@ export default function CreateQuizz() {
       <textarea>
 
       </textarea>
-
-
     </S.Container>
   )
 }

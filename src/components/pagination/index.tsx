@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
-import * as S from "./style"
+import * as S from "./style";
 
 interface PaginationProps {
   itemsPerPage: number,
@@ -33,6 +33,5 @@ export default function PaginatedItems({ itemsPerPage, totalItems, currentPage, 
         className="pagination"
       />
     </S.Pagiination>
-
   );
 }

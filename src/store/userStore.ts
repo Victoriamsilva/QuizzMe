@@ -1,5 +1,5 @@
 import { makeObservable, observable, action } from 'mobx';
-import { UserModel } from '../domain/entities/user.model';
+import { UserModel } from '../Domain/Entities/user.model';
 
 export interface UserStoreProps {
   getToken: () => string | null;
@@ -20,6 +20,7 @@ class UserStore {
       setUserInformation: action,
       user: observable
     });
+
     const user = localStorage.getItem('user');
     if (user) {
       this.user = new UserModel(JSON.parse(user));

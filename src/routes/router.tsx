@@ -11,7 +11,6 @@ import Profile from '../pages/Profile';
 import { Wrapper } from '../styles/styles';
 import UserStore from '../store/userStore';
 
-
 export function AppRoutes() {
   return (
     <Provider {...{ UserStore }}>

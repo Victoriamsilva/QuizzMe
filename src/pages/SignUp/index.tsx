@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/index';
-import Input from '../../components/input';
+import Input from '../../components/Imput';
 import FormWrapper from '../../components/FormWrapper';
 import ArrowImage from '../../assets/arrow-left.png';
 import * as S from './styles';
@@ -8,9 +8,7 @@ import signUp from '../../service/signUp';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import notify from '../../utils/notify';
-import { UserModel } from '../../domain/entities/user.model';
-import { useContext } from 'react';
-import { TokenContext } from '../../store/context';
+import { UserModel } from '../../Domain/Entities/user.model';
 import userStore, { UserStoreProps } from '../../store/userStore';
 import { observer } from 'mobx-react';
 

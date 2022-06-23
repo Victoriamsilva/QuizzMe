@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/index';
-import Input from '../../components/input';
+import Input from '../../components/Imput';
 import SocialLoginButton from '../../components/SocialLoginButton';
 import logoGoogle from '../../assets/logo-google.png';
 import logoFacebook from '../../assets/logo-facebook.png';
@@ -9,15 +9,13 @@ import login from '../../service/login';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import notify from '../../utils/notify';
-import { UserModel } from '../../domain/entities/user.model';
-import { inject, observer } from 'mobx-react';
+import { UserModel } from '../../Domain/Entities/user.model';
+import { observer } from 'mobx-react';
 import { UserStoreProps } from '../../store/userStore';
-
 
 function Login({ UserStore }: { UserStore: UserStoreProps }) {
   const navigate = useNavigate();
   const { setToken, setUserInformation } = UserStore;
-
 
   const schemaUser = Yup.object().shape({
     email: Yup.string()
@@ -25,7 +23,6 @@ function Login({ UserStore }: { UserStore: UserStoreProps }) {
       .required('Email é obrigatório'),
     password: Yup.string().required('Senha é obrigatório')
   });
-
 
   async function loginUser(values: UserModel) {
     try {
@@ -91,7 +88,6 @@ function Login({ UserStore }: { UserStore: UserStoreProps }) {
               touched={touched.password}
               onBlur={handleBlur}
             />
-
             <Button text="Logar no Quizz Me!" disabled={!isValid} />
             <h2>OU</h2>
             <SocialLoginButton
@@ -104,9 +100,7 @@ function Login({ UserStore }: { UserStore: UserStoreProps }) {
               image={logoFacebook}
               color="blue"
             />
-
             <h2>OU</h2>
-
             <a onClick={handleClick}>Crie uma conta</a>
           </form>
         )}
@@ -114,7 +108,5 @@ function Login({ UserStore }: { UserStore: UserStoreProps }) {
     </FormWrapper>
   );
 }
-
-
 
 export default observer(Login);

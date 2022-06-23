@@ -1,9 +1,5 @@
 import * as S from "./style";
-import Image from "../../assets/image.jpg";
 import { useNavigate } from "react-router-dom";
-import ListQuizz from "../../service/listQuizz";
-import { useEffect, useState } from "react";
-
 interface CardProps {
   image: string,
   title: string,
