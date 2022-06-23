@@ -9,13 +9,14 @@ import login from '../../service/login';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import notify from '../../utils/notify';
-import { useContext, useState } from 'react';
-import { TokenContext } from '../../store/context';
 import { UserModel } from '../../domain/entities/user.model';
+import { inject, observer } from 'mobx-react';
+import { UserStoreProps } from '../../store/userStore';
 
-export default function Login() {
+
+function Login({ UserStore }: { UserStore: UserStoreProps }) {
   const navigate = useNavigate();
-  const { setToken, setUserInformation } = useContext(TokenContext);
+  const { setToken, setUserInformation } = UserStore;
 
 
   const schemaUser = Yup.object().shape({
@@ -42,6 +43,7 @@ export default function Login() {
         navigate('/home');
       }
     } catch (error: any) {
+      console.log(error)
       error.response.data.message &&
         typeof error.response.data.message === 'string'
         ? notify(error.response.data.message)
@@ -112,3 +114,7 @@ export default function Login() {
     </FormWrapper>
   );
 }
+
+
+
+export default observer(Login);

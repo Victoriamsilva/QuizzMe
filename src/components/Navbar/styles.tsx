@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Navbar = styled.div`
- width: 200px;
+ /* width: 200px; */
  height: 100vh;
  background: linear-gradient(39deg, rgba(51,59,101,1) 27%, rgba(82,102,205,1) 100%);
  color: var(--main-yellow);
@@ -59,6 +59,7 @@ export const Navbar = styled.div`
   @media screen and (max-width: 600px) {
     transition: all 0.3s ease;
     transform: translateX(-200px);
+    display: none;
   }
 `;
 

@@ -26,6 +26,10 @@ html {
 --red: #EA4335;
 --blue: #475993;
 --black: #000000;
+--blue-lighter:#124e78;
+--beige: #f0f0c9;
+--purple-lighter: #c3d0fc;
+--purple-white: #d9e1ff;
 }
 `;
 

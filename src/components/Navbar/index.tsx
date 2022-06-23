@@ -2,12 +2,13 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import LogOut from "../../assets/exit.png";
 import * as S from './styles';
-import { useContext } from "react";
-import { TokenContext } from "../../store/context";
+import { observer } from 'mobx-react';
 
-export default function Navbar() {
+import { UserStoreProps } from "../../store/userStore";
+
+function Navbar({ UserStore }: { UserStore: UserStoreProps }) {
   const navigate = useNavigate();
-  const { getToken, removeToken, user } = useContext(TokenContext);
+  const { getToken, removeToken, user } = UserStore;
   function logOut() {
     removeToken();
     navigate("/");
@@ -20,7 +21,7 @@ export default function Navbar() {
         <S.Links data-testid="navbar-links-test">
           <h2 onClick={() => navigate("/home")}>Todos os Quizz</h2>
           <h2 onClick={() => navigate("/my-quizz")}>Meus Quizz</h2>
-          <h2>Criar Quizz</h2>
+          <h2 onClick={() => navigate("/create-quizz")}>Criar Quizz</h2>
         </S.Links>
         <div className="profile" onClick={() => navigate("/my-profile")} data-testid="avatar-test">
           <S.Avatar src={user?.image} />
@@ -37,3 +38,5 @@ export default function Navbar() {
       : null
   )
 }
+
+export default observer(Navbar)
