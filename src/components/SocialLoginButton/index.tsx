@@ -1,4 +1,3 @@
-import { BlockquoteHTMLAttributes } from "react";
 import * as S from "./styles";
 
 interface ButtonProps {

@@ -1,9 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { ButtonProps } from './index';
 
-export const Button = styled.button`
+export const Button = styled.button<ButtonProps>`
+  background-image: ${(props) =>
+    `${props.background ? `url(${props.background})` : ''}`};
+  width: ${(props) => `${props.width ? props.width : '100%'}`};
+  background-repeat: ${(props) => `${props.background ? 'no-repeat' : ''}`};
+  background-position: ${(props) => `${props.background ? 'center' : ''}`};
   background-color: var(--main-yellow);
   color: var(--text-blue);
-  width: 100%;
   height: 38px;
   border-radius: 0.375rem;
   border: none;

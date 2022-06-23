@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/index';
-import Input from '../../components/input';
+import Input from '../../components/Imput';
 import SocialLoginButton from '../../components/SocialLoginButton';
 import logoGoogle from '../../assets/logo-google.png';
 import logoFacebook from '../../assets/logo-facebook.png';
@@ -9,14 +9,13 @@ import login from '../../service/login';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import notify from '../../utils/notify';
-import { useContext, useState } from 'react';
-import { TokenContext } from '../../store/context';
-import { UserModel } from '../../domain/entities/user.model';
+import { UserModel } from '../../Domain/Entities/user.model';
+import { observer } from 'mobx-react';
+import { UserStoreProps } from '../../store/userStore';
 
-export default function Login() {
+function Login({ UserStore }: { UserStore: UserStoreProps }) {
   const navigate = useNavigate();
-  const { setToken, setUserInformation } = useContext(TokenContext);
-
+  const { setToken, setUserInformation } = UserStore;
 
   const schemaUser = Yup.object().shape({
     email: Yup.string()
@@ -24,7 +23,6 @@ export default function Login() {
       .required('Email é obrigatório'),
     password: Yup.string().required('Senha é obrigatório')
   });
-
 
   async function loginUser(values: UserModel) {
     try {
@@ -42,6 +40,7 @@ export default function Login() {
         navigate('/home');
       }
     } catch (error: any) {
+      console.log(error)
       error.response.data.message &&
         typeof error.response.data.message === 'string'
         ? notify(error.response.data.message)
@@ -89,7 +88,6 @@ export default function Login() {
               touched={touched.password}
               onBlur={handleBlur}
             />
-
             <Button text="Logar no Quizz Me!" disabled={!isValid} />
             <h2>OU</h2>
             <SocialLoginButton
@@ -102,9 +100,7 @@ export default function Login() {
               image={logoFacebook}
               color="blue"
             />
-
             <h2>OU</h2>
-
             <a onClick={handleClick}>Crie uma conta</a>
           </form>
         )}
@@ -112,3 +108,5 @@ export default function Login() {
     </FormWrapper>
   );
 }
+
+export default observer(Login);

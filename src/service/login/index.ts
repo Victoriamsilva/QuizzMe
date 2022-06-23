@@ -1,4 +1,4 @@
-import { UserModel, UserProps } from '../../domain/entities/user.model';
+import { UserModel, UserProps } from '../../Domain/Entities/user.model';
 import api from '../api';
 
 export default async function login({

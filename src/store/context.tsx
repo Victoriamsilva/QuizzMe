@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { UserModel } from '../domain/entities/user.model';
+import { UserModel } from '../Domain/Entities/user.model';
 
 interface TokenContext {
   getToken: () => string | null;

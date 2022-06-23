@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { UserModel } from '../domain/entities/user.model';
+import { UserModel } from '../Domain/Entities/user.model';
 import { TokenContext } from './context';
 import { useEffect } from "react";
-
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -40,6 +39,7 @@ export function Provider({ children }: ProviderProps) {
     localStorage.removeItem('user');
 
   }
+
   return (
     <TokenContext.Provider
       value={{

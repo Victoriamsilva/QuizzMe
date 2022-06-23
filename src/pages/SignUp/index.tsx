@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/index';
-import Input from '../../components/input';
+import Input from '../../components/Imput';
 import FormWrapper from '../../components/FormWrapper';
 import ArrowImage from '../../assets/arrow-left.png';
 import * as S from './styles';
@@ -8,11 +8,11 @@ import signUp from '../../service/signUp';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import notify from '../../utils/notify';
-import { UserModel } from '../../domain/entities/user.model';
-import { useContext } from 'react';
-import { TokenContext } from '../../store/context';
+import { UserModel } from '../../Domain/Entities/user.model';
+import userStore, { UserStoreProps } from '../../store/userStore';
+import { observer } from 'mobx-react';
 
-export default function SignUp() {
+function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
   const navigate = useNavigate();
   const schemaUser = Yup.object().shape({
     name: Yup.string().required('Nome é obrigatório'),
@@ -25,7 +25,7 @@ export default function SignUp() {
       .oneOf([Yup.ref('password'), null], 'Senhas devem ser iguais')
   });
 
-  const { setToken, removeToken } = useContext(TokenContext);
+  const { setToken, removeToken } = UserStore;
 
   async function signUpUser({ name, email, password }: UserModel) {
     try {
@@ -113,3 +113,5 @@ export default function SignUp() {
     </FormWrapper>
   );
 }
+
+export default observer(SignUp);
