@@ -11,6 +11,8 @@ export interface InputProps {
   background?: string;
   margin?: string;
   border?: string;
+  pattern?: string;
+  label?: string;
 }
 
 export default function Input({
@@ -21,12 +23,15 @@ export default function Input({
   name,
   error,
   touched,
+  pattern,
+  label,
   background,
   margin,
   border
 }: InputProps) {
   return (
     <>
+      <label>{label}</label>
       <S.Input
         type={type}
         placeholder={placeholder}
@@ -35,6 +40,7 @@ export default function Input({
         error={error}
         onBlur={onBlur}
         touched={touched}
+        pattern={pattern}
         background={background}
         margin={margin}
         data-testid="input-test"

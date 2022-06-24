@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Pagiination = styled.div`
+export const Pagination = styled.div`
   width: 100%;
   margin: 20px 0;
   justify-content: center;

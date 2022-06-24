@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/index';
-import Input from '../../components/Imput';
+import Input from '../../components/Input';
 import FormWrapper from '../../components/FormWrapper';
 import ArrowImage from '../../assets/arrow-left.png';
-import * as S from './styles';
 import signUp from '../../service/signUp';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import * as S from './styles';
 import notify from '../../utils/notify';
 import { UserModel } from '../../Domain/Entities/user.model';
 import userStore, { UserStoreProps } from '../../store/userStore';
@@ -19,7 +19,7 @@ function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
     email: Yup.string()
       .email('Formato de email inválido')
       .required('Email é obrigatório'),
-    password: Yup.string().required('Senha é obrigatório'),
+    password: Yup.string().required('Senha é obrigatório').min(8, 'a senha precisa ter no mínimo 8 caracteres'),
     confirmPassword: Yup.string()
       .required('Confirmar senha é obrigatório')
       .oneOf([Yup.ref('password'), null], 'Senhas devem ser iguais')
@@ -78,6 +78,7 @@ function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
               error={errors?.name}
               touched={touched.name}
               onBlur={handleBlur}
+              pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"
             />
             <Input
               onChange={handleChange}
@@ -105,6 +106,7 @@ function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
               error={errors?.confirmPassword}
               touched={touched.confirmPassword}
               onBlur={handleBlur}
+
             />
             <Button text="Cadastrar-se" disabled={!isValid} />
           </form>
