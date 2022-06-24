@@ -7,10 +7,10 @@ interface PaginationProps {
   itemsPerPage: number,
   totalItems: number,
   currentPage?: any,
-  onSelect: (event: any) => void
+  onSelect: (indexOfFirstItem: number, indexOfLastItem: number) => void
 }
 
-export default function PaginatedItems({ itemsPerPage, totalItems, currentPage, onSelect = () => { } }: PaginationProps) {
+export default function PaginatedItems({ itemsPerPage, totalItems, onSelect = () => { } }: PaginationProps) {
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
@@ -18,11 +18,14 @@ export default function PaginatedItems({ itemsPerPage, totalItems, currentPage, 
   }, [itemsPerPage]);
 
   const handlePageClick = (event: any) => {
-    onSelect(event.selected);
+    console.log(event.selected)
+    const indexOfLastItem = (event.selected + 1) * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    onSelect(indexOfFirstItem, indexOfLastItem);
   };
 
   return (
-    <S.Pagiination>
+    <S.Pagination>
       <ReactPaginate
         breakLabel="..."
         nextLabel=">"
@@ -32,6 +35,6 @@ export default function PaginatedItems({ itemsPerPage, totalItems, currentPage, 
         previousLabel="<"
         className="pagination"
       />
-    </S.Pagiination>
+    </S.Pagination>
   );
 }

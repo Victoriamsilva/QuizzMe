@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/index';
-import Input from '../../components/Imput';
+import Input from '../../components/Input';
 import SocialLoginButton from '../../components/SocialLoginButton';
 import logoGoogle from '../../assets/logo-google.png';
 import logoFacebook from '../../assets/logo-facebook.png';
