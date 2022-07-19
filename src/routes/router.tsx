@@ -9,7 +9,8 @@ import CreateQuizz from '../pages/CreateQuizz';
 import Navbar from '../components/Navbar';
 import Profile from '../pages/Profile';
 import { Wrapper } from '../styles/styles';
-import UserStore from '../store/userStore';
+import UserStore from '../store/user/userStore';
+import { QuizzDetails } from '../pages/QuizzDetails';
 
 export function AppRoutes() {
   return (
@@ -25,6 +26,7 @@ export function AppRoutes() {
               <Route path="/my-quizzes" element={<MyQuizzes />} />
               <Route path="/my-profile" element={<Profile />} />
               <Route path='/create-quizz' element={<CreateQuizz />} />
+              <Route path='/quizz-details/:id' element={<QuizzDetails />} />
             </Route>
           </Routes>
         </Wrapper>

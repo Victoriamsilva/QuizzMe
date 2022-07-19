@@ -1,5 +1,5 @@
 import { makeObservable, observable, action } from 'mobx';
-import { UserModel } from '../Domain/Entities/user.model';
+import { UserModel } from '../../Domain/Entities/user/user.model';
 
 export interface UserStoreProps {
   getToken: () => string | null;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   background-color: var(--main-blue);
@@ -66,7 +66,7 @@ export const Form = styled.div`
     font-size: 23px;
     &::after,
     &::before {
-      content: "";
+      content: '';
       width: 100%;
       height: 5px;
       background-color: white;

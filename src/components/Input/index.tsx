@@ -13,6 +13,7 @@ export interface InputProps {
   border?: string;
   pattern?: string;
   label?: string;
+  value?: string;
 }
 
 export default function Input({
@@ -27,13 +28,15 @@ export default function Input({
   label,
   background,
   margin,
-  border
+  border,
+  value = ''
 }: InputProps) {
   return (
     <>
       <label>{label}</label>
       <S.Input
         type={type}
+        value={value}
         placeholder={placeholder}
         onChange={onChange}
         name={name}

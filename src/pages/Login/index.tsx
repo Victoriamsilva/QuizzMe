@@ -6,12 +6,12 @@ import logoGoogle from '../../assets/logo-google.png';
 import logoFacebook from '../../assets/logo-facebook.png';
 import FormWrapper from '../../components/FormWrapper';
 import login from '../../service/login';
-import { Formik } from 'formik';
 import * as Yup from 'yup';
 import notify from '../../utils/notify';
-import { UserModel } from '../../Domain/Entities/user.model';
+import { UserModel } from '../../Domain/Entities/user/user.model';
 import { observer } from 'mobx-react';
-import { UserStoreProps } from '../../store/userStore';
+import { UserStoreProps } from '../../store/user/userStore';
+import { Formik, useFormik } from 'formik';
 
 function Login({ UserStore }: { UserStore: UserStoreProps }) {
   const navigate = useNavigate();
@@ -52,6 +52,14 @@ function Login({ UserStore }: { UserStore: UserStoreProps }) {
     navigate('/cadastro');
   }
 
+
+
+  // const formik = useFormik({
+  //   initialValues: { email: "", password: "" },
+  //   onSubmit: loginUser,
+  //   validationSchema: schemaUser
+  // });
+
   return (
     <FormWrapper>
       <h1>Faça Login</h1>
@@ -68,6 +76,7 @@ function Login({ UserStore }: { UserStore: UserStoreProps }) {
           errors,
           touched,
           isValid,
+          values
         }) => (
           <form onSubmit={handleSubmit}>
             <Input
@@ -78,6 +87,7 @@ function Login({ UserStore }: { UserStore: UserStoreProps }) {
               error={errors?.email}
               touched={touched.email}
               onBlur={handleBlur}
+              value={values.email}
             />
             <Input
               onChange={handleChange}
@@ -87,6 +97,7 @@ function Login({ UserStore }: { UserStore: UserStoreProps }) {
               error={errors?.password}
               touched={touched.password}
               onBlur={handleBlur}
+              value={values.password}
             />
             <Button text="Logar no Quizz Me!" disabled={!isValid} />
             <h2>OU</h2>

@@ -8,8 +8,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import * as S from './styles';
 import notify from '../../utils/notify';
-import { UserModel } from '../../Domain/Entities/user.model';
-import userStore, { UserStoreProps } from '../../store/userStore';
+import { UserModel } from '../../Domain/Entities/user/user.model';
+import userStore, { UserStoreProps } from '../../store/user/userStore';
 import { observer } from 'mobx-react';
 
 function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
@@ -67,7 +67,8 @@ function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
           errors,
           touched,
           handleBlur,
-          isValid
+          isValid,
+          values
         }) => (
           <form onSubmit={handleSubmit}>
             <Input
@@ -78,6 +79,7 @@ function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
               error={errors?.name}
               touched={touched.name}
               onBlur={handleBlur}
+              value={values.name}
               pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"
             />
             <Input
@@ -88,6 +90,7 @@ function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
               error={errors?.email}
               touched={touched.email}
               onBlur={handleBlur}
+              value={values.email}
             />
             <Input
               onChange={handleChange}
@@ -97,6 +100,7 @@ function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
               error={errors?.password}
               touched={touched.password}
               onBlur={handleBlur}
+              value={values.password}
             />
             <Input
               onChange={handleChange}
@@ -106,7 +110,7 @@ function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
               error={errors?.confirmPassword}
               touched={touched.confirmPassword}
               onBlur={handleBlur}
-
+              value={values.confirmPassword}
             />
             <Button text="Cadastrar-se" disabled={!isValid} />
           </form>

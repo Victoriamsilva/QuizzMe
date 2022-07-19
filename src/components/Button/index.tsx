@@ -4,9 +4,12 @@ export interface ButtonProps {
   text?: string;
   type?: "submit" | "button";
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (parameter?: any) => void;
   width?: any;
   background?: string;
+  backgroundColor?: string;
+  marginRight?: string;
+  handleChange?: any;
 }
 
 export default function Button({
@@ -15,10 +18,13 @@ export default function Button({
   disabled = false,
   onClick,
   width,
-  background
+  background,
+  backgroundColor,
+  marginRight,
+  handleChange
 }: ButtonProps) {
   return (
-    <S.Button type={type} onClick={onClick} disabled={disabled} width={width} background={background} data-testid="button-test">
+    <S.Button onChange={handleChange} type={type} onClick={onClick} disabled={disabled} marginRight={marginRight} width={width} backgroundColor={backgroundColor} background={background} data-testid="button-test">
       {text}
     </S.Button>
   );
