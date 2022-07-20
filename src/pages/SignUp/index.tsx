@@ -11,6 +11,9 @@ import notify from '../../utils/notify';
 import { UserModel } from '../../Domain/Entities/user/user.model';
 import userStore, { UserStoreProps } from '../../store/user/userStore';
 import { observer } from 'mobx-react';
+import ModalComponent from '../../components/Modal';
+import { useState } from 'react';
+
 
 function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
   const navigate = useNavigate();
@@ -19,12 +22,13 @@ function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
     email: Yup.string()
       .email('Formato de email inválido')
       .required('Email é obrigatório'),
-    password: Yup.string().required('Senha é obrigatório').min(8, 'a senha precisa ter no mínimo 8 caracteres'),
+    password: Yup.string().required('Senha é obrigatório').min(6, 'a senha precisa ter no mínimo 6 caracteres'),
     confirmPassword: Yup.string()
       .required('Confirmar senha é obrigatório')
       .oneOf([Yup.ref('password'), null], 'Senhas devem ser iguais')
   });
-
+  const [open, setOpen] = useState<boolean>(false);
+  const [error, setError] = useState('');
   const { setToken, removeToken } = UserStore;
 
   async function signUpUser({ name, email, password }: UserModel) {
@@ -37,8 +41,8 @@ function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
     } catch (error: any) {
       error.response.data.message &&
         typeof error.response.data.message === "string"
-        ? notify(error.response.data.message)
-        : notify("Erro inesperado");
+        ? setError(error.response.data.message)
+        : setError("Erro inesperado");
     }
   }
 
@@ -116,6 +120,10 @@ function SignUp({ UserStore }: { UserStore: UserStoreProps }) {
           </form>
         )}
       </Formik>
+
+      <ModalComponent open={open} openModal={() => setOpen(true)} closeModal={() => setOpen(false)}>
+        <h2>{error}</h2>
+      </ModalComponent>
     </FormWrapper>
   );
 }

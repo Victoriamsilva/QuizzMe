@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { InputProps } from '.';
 
+export const Container = styled.div<InputProps>`
+  width: 100%;
+  position: relative;
+`;
+
 export const Input = styled.input<InputProps>`
   background-color: ${(props) =>
     `${props.background ? props.background : null}`};
@@ -14,7 +19,7 @@ export const Input = styled.input<InputProps>`
   outline: none;
   border: 2px solid transparent;
   box-sizing: border-box;
-
+  padding-right: ${(props) => `${props.type === 'password' ? '25px' : ''}`};
   &:focus {
     border-color: var(--main-yellow);
   }
@@ -28,4 +33,12 @@ export const InputError = styled.span`
   display: inline-block;
   width: 100%;
   margin-top: 5px;
+`;
+
+export const Eye = styled.img`
+  position: absolute;
+  width: 20px;
+  right: 5px;
+  top: 10px;
+  cursor: pointer;
 `;

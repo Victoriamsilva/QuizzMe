@@ -7,15 +7,18 @@ import logoFacebook from '../../assets/logo-facebook.png';
 import FormWrapper from '../../components/FormWrapper';
 import login from '../../service/login';
 import * as Yup from 'yup';
-import notify from '../../utils/notify';
 import { UserModel } from '../../Domain/Entities/user/user.model';
 import { observer } from 'mobx-react';
 import { UserStoreProps } from '../../store/user/userStore';
 import { Formik, useFormik } from 'formik';
+import { useState } from 'react';
+import ModalComponent from '../../components/Modal';
 
 function Login({ UserStore }: { UserStore: UserStoreProps }) {
   const navigate = useNavigate();
   const { setToken, setUserInformation } = UserStore;
+  const [open, setOpen] = useState<boolean>(false);
+  const [error, setError] = useState('');
 
   const schemaUser = Yup.object().shape({
     email: Yup.string()
@@ -26,39 +29,33 @@ function Login({ UserStore }: { UserStore: UserStoreProps }) {
 
   async function loginUser(values: UserModel) {
     try {
-      // const user = await login(values);
-      const user = new UserModel({
-        name: "Victoria",
-        email: "victoria@gmail.com",
-        password: "123",
-        token: "1234",
-        image: "https://i.pinimg.com/originals/e4/34/2a/e4342a4e0e968344b75cf50cf1936c09.jpg"
-      })
+      const user = await login(values);
+      // const user = new UserModel({
+      //   name: "Victoria",
+      //   email: "victoria@gmail.com",
+      //   password: "123",
+      //   token: "1234",
+      //   image: "https://i.pinimg.com/originals/e4/34/2a/e4342a4e0e968344b75cf50cf1936c09.jpg"
+      // })
       if (user.token) {
         setToken(user.token);
         setUserInformation(user);
         navigate('/home');
       }
     } catch (error: any) {
-      console.log(error)
-      error.response.data.message &&
-        typeof error.response.data.message === 'string'
-        ? notify(error.response.data.message)
-        : notify('Erro inesperado');
+      // console.log(error.response.data.message);
+      setError('Erro inesperado');
+      setOpen(true);
+
+
+
     }
   }
+  console.log(error);
 
   function handleClick() {
     navigate('/cadastro');
   }
-
-
-
-  // const formik = useFormik({
-  //   initialValues: { email: "", password: "" },
-  //   onSubmit: loginUser,
-  //   validationSchema: schemaUser
-  // });
 
   return (
     <FormWrapper>
@@ -116,6 +113,11 @@ function Login({ UserStore }: { UserStore: UserStoreProps }) {
           </form>
         )}
       </Formik>
+
+      <ModalComponent open={open} openModal={() => setOpen(true)} closeModal={() => setOpen(false)}>
+        <h2>{error}</h2>
+      </ModalComponent>
+
     </FormWrapper>
   );
 }
