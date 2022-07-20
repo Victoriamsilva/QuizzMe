@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UserModel } from '../Domain/Entities/user.model';
+import { UserModel } from '../Domain/Entities/user/user.model';
 import { TokenContext } from './context';
 import { useEffect } from "react";
 

@@ -4,7 +4,7 @@ import LogOut from "../../assets/exit.png";
 import * as S from './styles';
 import { observer } from 'mobx-react';
 
-import { UserStoreProps } from "../../store/userStore";
+import { UserStoreProps } from "../../store/user/userStore";
 
 function Navbar({ UserStore }: { UserStore: UserStoreProps }) {
   const navigate = useNavigate();

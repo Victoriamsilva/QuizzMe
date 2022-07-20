@@ -7,7 +7,12 @@ export const Button = styled.button<ButtonProps>`
   width: ${(props) => `${props.width ? props.width : '100%'}`};
   background-repeat: ${(props) => `${props.background ? 'no-repeat' : ''}`};
   background-position: ${(props) => `${props.background ? 'center' : ''}`};
-  background-color: var(--main-yellow);
+  background-color: ${(props) =>
+    `${
+      props.backgroundColor ? `${props.backgroundColor}` : 'var(--main-yellow)'
+    }`};
+  margin-right: ${(props) =>
+    `${props.marginRight ? `${props.marginRight}` : ''}`};
   color: var(--text-blue);
   height: 38px;
   border-radius: 0.375rem;

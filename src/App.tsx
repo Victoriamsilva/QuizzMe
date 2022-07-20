@@ -31,6 +31,7 @@ html {
 --purple-lighter: #c3d0fc;
 --purple-white: #d9e1ff;
 --blue-light: #c4e3ff;
+--purple-darker: #8194ee;
 }
 `;
 

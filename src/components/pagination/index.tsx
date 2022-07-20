@@ -7,10 +7,10 @@ interface PaginationProps {
   itemsPerPage: number,
   totalItems: number,
   currentPage?: any,
-  onSelect: (indexOfFirstItem: number, indexOfLastItem: number) => void
+  onSelect?: (indexOfFirstItem: number, indexOfLastItem: number) => void
 }
 
-export default function PaginatedItems({ itemsPerPage, totalItems, onSelect = () => { } }: PaginationProps) {
+export default function PaginatedItems({ itemsPerPage, totalItems, onSelect = (a, b) => { } }: PaginationProps) {
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
